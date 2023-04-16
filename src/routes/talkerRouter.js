@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTalkers, getTalkerById } = require('../utils/talker');
+const { getTalkers, getTalkerById, addTalker } = require('../utils/talker');
 const validateAuth = require('../middlewares/validateAuth');
 const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
@@ -10,6 +10,7 @@ const validateRate = require('../middlewares/validateRate');
 const router = express.Router();
 
 const OK = 200;
+const CREATED = 201;
 const NOT_FOUND = 404;
 
 router.get('/', async (_req, res) => {
@@ -38,7 +39,9 @@ router.post(
   validateWatchedAt,
   validateRate,
   async (req, res) => {
-    res.status(201).end();
+    const talker = req.body;
+    const inserted = await addTalker(talker);
+    res.status(CREATED).json(inserted);
   },
 ); 
 
