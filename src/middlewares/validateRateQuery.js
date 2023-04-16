@@ -1,14 +1,5 @@
-function isInteger(number) {
-  return parseInt(number, 10) === number;
-}
-
-function isInRange(number, min, max) {
-  return number >= min && number <= max;
-}
-
-function isNotEmpty(value) {
-  return value !== null && value !== undefined;
-}
+const { isInteger, isInRange } = require('../utils/numbers');
+const { isEmpty } = require('../utils/values');
 
 function validateRateQuerie(req, _res, next) {
   const MIN_RATE = 1;
@@ -18,7 +9,7 @@ function validateRateQuerie(req, _res, next) {
   const { rate } = req.query;
   const numRate = Number(rate);
   const isValid = isInteger(numRate) && isInRange(numRate, MIN_RATE, MAX_RATE);
-  if (isNotEmpty(rate) && !isValid) {
+  if (!isEmpty(rate) && !isValid) {
     return next({
       status: BAD_REQUEST,
       message: `O campo "rate" deve ser um número inteiro entre ${MIN_RATE} e ${MAX_RATE}`,
