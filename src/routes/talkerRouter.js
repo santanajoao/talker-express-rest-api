@@ -1,5 +1,6 @@
 const express = require('express');
 const { getTalkers, getTalkerById } = require('../utils/talker');
+const validateAuth = require('../middlewares/validateAuth');
 
 const router = express.Router();
 
@@ -21,6 +22,10 @@ router.get('/:id', async (req, res) => {
       message: 'Pessoa palestrante não encontrada',
     });
   }
+});
+
+router.post('/talker', validateAuth, async (req, res) => {
+
 });
 
 module.exports = router;

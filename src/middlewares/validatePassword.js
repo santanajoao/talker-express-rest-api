@@ -4,11 +4,13 @@ function validatePassword(req, _res, next) {
   const { password } = req.body;
 
   if (!password) {
-    next({ status: BAD_REQUEST, message: 'O campo "password" é obrigatório' });
+    return next({
+      status: BAD_REQUEST, message: 'O campo "password" é obrigatório',
+    });
   }
 
   if (password.length < MIN_LENGHT) {
-    next({
+    return next({
       status: BAD_REQUEST,
       message: 'O "password" deve ter pelo menos 6 caracteres',
     });
