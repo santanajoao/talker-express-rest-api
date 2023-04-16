@@ -35,7 +35,6 @@ router.get(
   validateDateQuery,
   async (req, res) => {
     const { q, rate, date } = req.query;
-    console.error(date);
     const result = await searchTalkers(q, Number(rate), date);
     res.status(OK).json(result);
   },

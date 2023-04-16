@@ -60,34 +60,19 @@ async function deleteTalker(id) {
   await writeTalkersFile(talkersWithoutDeleted);
 }
 
-function filterByRate(talkers, rate) {
-  const filterResult = talkers.filter(({ talk }) => talk.rate === rate);
-  return filterResult;
-}
-
-function filterByName(talkers, name) {
-  const filterResult = talkers.filter((talker) => talker.name.includes(name));
-  return filterResult;
-}
-
-function filterByDate(talkers, date) {
-  const filterResult = talkers.filter(({ talk }) => talk.watchedAt === date);
-  return filterResult;
-}
-
 async function searchTalkers(query, rate, date) {
   let searchResult = await getTalkers();
 
   if (query) {
-    searchResult = await filterByName(searchResult, query);
+    searchResult = searchResult.filter((talker) => talker.name.includes(query));
   }
   
   if (rate) {
-    searchResult = await filterByRate(searchResult, Number(rate));
+    searchResult = searchResult.filter(({ talk }) => talk.rate === rate);
   }
   
   if (date) {
-    searchResult = await filterByDate(searchResult, date);
+    searchResult = searchResult.filter(({ talk }) => talk.watchedAt === date);
   }
 
   return searchResult;
