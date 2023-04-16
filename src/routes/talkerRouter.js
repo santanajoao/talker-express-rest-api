@@ -24,8 +24,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/talker', validateAuth, async (req, res) => {
-
+router.post('/', validateAuth, async (req, res) => {
+  res.status(201).end();
 });
 
 module.exports = router;

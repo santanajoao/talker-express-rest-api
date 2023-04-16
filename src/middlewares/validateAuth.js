@@ -2,14 +2,14 @@ const UNAUTHORIZED = 401;
 
 function validateAuth(req, _res, next) {
   const TOKEN_LENGTH = 16;
-  const token = req.get('Authorization');
+  const token = req.get('authorization');
 
   if (!token) {
-    next({ status: UNAUTHORIZED, message: 'Token não encontrado' });
+    return next({ status: UNAUTHORIZED, message: 'Token não encontrado' });
   }
 
   if (token.length !== TOKEN_LENGTH) {
-    next({ status: UNAUTHORIZED, message: 'Token inválido' });
+    return next({ status: UNAUTHORIZED, message: 'Token inválido' });
   }
 
   next();
