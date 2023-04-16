@@ -1,4 +1,4 @@
-function errorHandler(err, req, res, next) {
+function errorHandler(err, _req, res, _next) {
   const { status, message } = err;
 
   console.error(message);
