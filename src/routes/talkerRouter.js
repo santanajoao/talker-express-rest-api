@@ -5,6 +5,7 @@ const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
 const validateTalk = require('../middlewares/validateTalk');
 const validateWatchedAt = require('../middlewares/validateWatchedAt');
+const validateRate = require('../middlewares/validateRate');
 
 const router = express.Router();
 
@@ -35,6 +36,7 @@ router.post(
   validateAge,
   validateTalk,
   validateWatchedAt,
+  validateRate,
   async (req, res) => {
     res.status(201).end();
   },
