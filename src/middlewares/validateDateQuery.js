@@ -1,5 +1,4 @@
-const { isValidDate } = require('../utils/talker');
-const { isEmpty } = require('../utils/values');
+const { isValidDate, isEmpty } = require('../utils/validations');
 
 function validateDateQuery(req, _res, next) {
   const BAD_REQUEST = 400;

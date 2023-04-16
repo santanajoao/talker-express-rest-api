@@ -3,13 +3,10 @@ const fs = require('fs').promises;
 
 const FILE_PATH = path.resolve(__dirname, '../talker.json');
 
-function JSONfy(data) {
-  const INDENTATION = 2;
-  return JSON.stringify(data, null, INDENTATION);
-}
-
 async function writeTalkersFile(javaScriptData) {
-  await fs.writeFile(FILE_PATH, JSONfy(javaScriptData));
+  const INDENTATION = 2;
+  const formattedJSON = JSON.stringify(javaScriptData, null, INDENTATION);
+  await fs.writeFile(FILE_PATH, formattedJSON);
 }
 
 async function getTalkers() {
@@ -81,11 +78,6 @@ async function searchTalkers(query, rate, date) {
   return searchResult;
 }
 
-function isValidDate(date) {
-  const DATE_REGEX = /([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}/;
-  return DATE_REGEX.test(date);
-}
-
 module.exports = {
   getTalkers,
   getTalkerById,
@@ -93,5 +85,4 @@ module.exports = {
   updateTalker,
   deleteTalker,
   searchTalkers,
-  isValidDate,
 };

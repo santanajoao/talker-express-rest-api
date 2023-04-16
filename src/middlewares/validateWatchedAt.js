@@ -1,4 +1,4 @@
-const { isValidDate } = require('../utils/talker');
+const { isValidDate } = require('../utils/validations');
 
 function validateWatchedAt(req, _res, next) {
   const BAD_REQUEST = 400;

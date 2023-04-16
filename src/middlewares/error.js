@@ -1,5 +1,6 @@
 function errorHandler(err, _req, res, _next) {
-  const { status, message } = err;
+  const BAD_REQUEST = 500;
+  const { status = BAD_REQUEST, message } = err;
 
   console.error(message);
 

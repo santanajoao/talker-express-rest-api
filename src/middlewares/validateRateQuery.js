@@ -1,5 +1,4 @@
-const { isInteger, isInRange } = require('../utils/numbers');
-const { isEmpty } = require('../utils/values');
+const { isInteger, isInRange, isEmpty } = require('../utils/validations');
 
 function validateRateQuerie(req, _res, next) {
   const MIN_RATE = 1;
