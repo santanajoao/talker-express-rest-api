@@ -1,12 +1,14 @@
 const express = require('express');
 const talkerRouter = require('./routes/talkerRouter');
 const loginRouter = require('./routes/loginRouter');
+const errorHandler = require('./middlewares/error');
 
 const app = express();
 app.use(express.json());
 
 app.use('/talker', talkerRouter);
 app.use('/login', loginRouter);
+app.use(errorHandler);
 
 const HTTP_OK_STATUS = 200;
 const PORT = process.env.PORT || '3001';
