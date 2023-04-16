@@ -4,7 +4,10 @@ function validateRateQuerie(req, _res, next) {
   const BAD_REQUEST = 400;
 
   const rate = Number(req.query.rate);
-  if (rate < MIN_RATE || rate > MAX_RATE) {
+  const isNaN = Number.isNaN(rate);
+  const notInteger = parseInt(rate, 10) !== rate;
+  const outOfInterval = rate < MIN_RATE || rate > MAX_RATE;
+  if (outOfInterval || isNaN || notInteger) {
     return next({
       status: BAD_REQUEST,
       message: `O campo "rate" deve ser um número inteiro entre ${MIN_RATE} e ${MAX_RATE}`,
