@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTalkers, getTalkerById, addTalker, updateTalker } = require('../utils/talker');
+const { getTalkers, getTalkerById, addTalker, updateTalker, deleteTalker } = require('../utils/talker');
 const validateAuth = require('../middlewares/validateAuth');
 const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
@@ -11,6 +11,7 @@ const router = express.Router();
 
 const OK = 200;
 const CREATED = 201;
+const NO_CONTENT = 204;
 const NOT_FOUND = 404;
 
 router.get('/', async (_req, res) => {
@@ -66,5 +67,11 @@ router.put(
     }
   },
 );
+
+router.delete('/:id', validateAuth, async (req, res) => {
+  const id = Number(req.params.id);
+  await deleteTalker(id);
+  res.status(NO_CONTENT).end();
+});
 
 module.exports = router;

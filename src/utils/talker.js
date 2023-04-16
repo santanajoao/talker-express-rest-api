@@ -53,4 +53,17 @@ async function updateTalker(id, data) {
   return newTalker;
 }
 
-module.exports = { getTalkers, getTalkerById, addTalker, updateTalker };
+async function deleteTalker(id) {
+  const talkers = await getTalkers();
+  const talkersWithoutDeleted = talkers.filter((talker) => talker.id !== id);
+
+  await writeTalkersFile(talkersWithoutDeleted);
+}
+
+module.exports = {
+  getTalkers,
+  getTalkerById,
+  addTalker,
+  updateTalker,
+  deleteTalker,
+};
