@@ -1,5 +1,11 @@
 const express = require('express');
-const { getTalkers, getTalkerById, addTalker, updateTalker, deleteTalker } = require('../utils/talker');
+const {
+  getTalkers,
+  getTalkerById,
+  addTalker,
+  updateTalker,
+  deleteTalker,
+} = require('../utils/talker');
 const validateAuth = require('../middlewares/validateAuth');
 const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
