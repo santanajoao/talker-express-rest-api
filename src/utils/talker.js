@@ -70,13 +70,12 @@ function filterByName(talkers, name) {
   return filterResult;
 }
 
-// async function searchByName(name = '') {
-//   const talkers = await getTalkers();
-//   const searchResult = filterByName(talkers, name);
-//   return searchResult;
-// }
+function filterByDate(talkers, date) {
+  const filterResult = talkers.filter(({ talk }) => talk.watchedAt === date);
+  return filterResult;
+}
 
-async function searchTalkers(query, rate) {
+async function searchTalkers(query, rate, date) {
   let searchResult = await getTalkers();
 
   if (query) {
@@ -86,8 +85,17 @@ async function searchTalkers(query, rate) {
   if (rate) {
     searchResult = await filterByRate(searchResult, Number(rate));
   }
+  
+  if (date) {
+    searchResult = await filterByDate(searchResult, date);
+  }
 
   return searchResult;
+}
+
+function isValidDate(date) {
+  const DATE_REGEX = /([0-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/\d{4}/;
+  return DATE_REGEX.test(date);
 }
 
 module.exports = {
@@ -97,4 +105,5 @@ module.exports = {
   updateTalker,
   deleteTalker,
   searchTalkers,
+  isValidDate,
 };
