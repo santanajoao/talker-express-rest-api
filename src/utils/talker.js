@@ -41,16 +41,19 @@ async function addTalker(talker) {
 
 async function updateTalker(id, data) {
   const talkers = await getTalkers();
-  const talkerIndex = talkers.findIndex((talker) => talker.id === id);
-  if (talkerIndex === -1) {
-    return null;
+  const targetTalker = talkers.find((talker) => talker.id === id);
+  if (!targetTalker) return null;
+
+  if (data.rate) {
+    targetTalker.talk.rate = data.rate;
+  } else {
+    targetTalker.name = data.name;
+    targetTalker.age = data.age;
+    targetTalker.talk = data.talk;
   }
 
-  const newTalker = { ...data, id };
-  talkers[talkerIndex] = newTalker;
   await writeTalkersFile(talkers);
-
-  return newTalker;
+  return targetTalker;
 }
 
 async function deleteTalker(id) {

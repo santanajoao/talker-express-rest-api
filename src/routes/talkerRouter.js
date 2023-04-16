@@ -89,6 +89,12 @@ router.put(
   },
 );
 
+router.patch('/rate/:id', validateAuth, validateRateBody, async (req, res) => {
+  const id = Number(req.params.id);
+  await updateTalker(id, req.body);
+  res.status(NO_CONTENT).end();
+});
+
 router.delete('/:id', validateAuth, async (req, res) => {
   const id = Number(req.params.id);
   await deleteTalker(id);
