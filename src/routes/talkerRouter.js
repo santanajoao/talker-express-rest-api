@@ -15,6 +15,7 @@ const validateWatchedAt = require('../middlewares/validateWatchedAt');
 const validateRateBody = require('../middlewares/validateRateBody');
 const validateRateQuery = require('../middlewares/validateRateQuery');
 const validateDateQuery = require('../middlewares/validateDateQuery');
+const talkerDB = require('../db/talkerDB');
 
 const router = express.Router();
 
@@ -26,6 +27,11 @@ const NOT_FOUND = 404;
 router.get('/', async (_req, res) => {
   const talkers = await getTalkers();
   res.status(OK).json(talkers);
+});
+
+router.get('/db', async (_req, res) => {
+  const result = await talkerDB.getAllTalkers();
+  res.status(OK).json(result);
 });
 
 router.get(
