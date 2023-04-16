@@ -5,7 +5,7 @@ const {
   addTalker,
   updateTalker,
   deleteTalker,
-  searchTalkers,
+  searchByName,
 } = require('../utils/talker');
 const validateAuth = require('../middlewares/validateAuth');
 const validateName = require('../middlewares/validateName');
@@ -13,7 +13,7 @@ const validateAge = require('../middlewares/validateAge');
 const validateTalk = require('../middlewares/validateTalk');
 const validateWatchedAt = require('../middlewares/validateWatchedAt');
 const validateRateBody = require('../middlewares/validateRateBody');
-const validateRateQuerie = require('../middlewares/validateRateQuery');
+// const validateRateQuerie = require('../middlewares/validateRateQuery');
 
 const router = express.Router();
 
@@ -27,10 +27,9 @@ router.get('/', async (_req, res) => {
   res.status(OK).json(talkers);
 });
 
-router.get('/search', validateAuth, validateRateQuerie, async (req, res) => {
-  const { q, rate } = req.query;
-  console.error(q);
-  const result = await searchTalkers(q, rate);
+router.get('/search', validateAuth, async (req, res) => {
+  const { q } = req.query; 
+  const result = await searchByName(q);
   res.status(OK).json(result);
 });
 

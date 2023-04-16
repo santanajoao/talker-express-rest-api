@@ -60,29 +60,35 @@ async function deleteTalker(id) {
   await writeTalkersFile(talkersWithoutDeleted);
 }
 
-async function filterByRate(talkers, rate) {
-  const filterResult = talkers.filter(({ talk }) => talk.rate === rate);
-  return filterResult;
-}
+// function filterByRate(talkers, rate) {
+//   const filterResult = talkers.filter(({ talk }) => talk.rate === rate);
+//   return filterResult;
+// }
 
-async function filterByName(talkers, name) {
+function filterByName(talkers, name) {
   const filterResult = talkers.filter((talker) => talker.name.includes(name));
   return filterResult;
 }
 
-async function searchTalkers(query, rate) {
-  let searchResult = await getTalkers();
-
-  if (query) {
-    searchResult = await filterByName(searchResult, query);
-  }
-  
-  if (rate) {
-    searchResult = await filterByRate(searchResult, Number(rate));
-  }
-
+async function searchByName(name = '') {
+  const talkers = await getTalkers();
+  const searchResult = filterByName(talkers, name);
   return searchResult;
 }
+
+// async function searchTalkers(query, rate) {
+//   let searchResult = await getTalkers();
+
+//   if (query) {
+//     searchResult = await filterByName(searchResult, query);
+//   }
+  
+//   if (rate) {
+//     searchResult = await filterByRate(searchResult, Number(rate));
+//   }
+
+//   return searchResult;
+// }
 
 module.exports = {
   getTalkers,
@@ -90,5 +96,5 @@ module.exports = {
   addTalker,
   updateTalker,
   deleteTalker,
-  searchTalkers,
+  searchByName,
 };
