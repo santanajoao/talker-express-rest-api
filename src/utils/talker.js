@@ -8,6 +8,10 @@ function JSONfy(data) {
   return JSON.stringify(data, null, INDENTATION);
 }
 
+async function writeTalkersFile(javaScriptData) {
+  await fs.writeFile(FILE_PATH, JSONfy(javaScriptData));
+}
+
 async function getTalkers() {
   const response = await fs.readFile(FILE_PATH);
   return JSON.parse(response);
@@ -31,8 +35,22 @@ async function addTalker(talker) {
   const newTalker = { id: newId, ...talker };
   talkers.push(newTalker);
 
-  await fs.writeFile(FILE_PATH, JSONfy(talkers));
+  await writeTalkersFile(talkers);
   return newTalker;
 }
 
-module.exports = { getTalkers, getTalkerById, addTalker };
+async function updateTalker(id, data) {
+  const talkers = await getTalkers();
+  const talkerIndex = talkers.findIndex((talker) => talker.id === id);
+  if (talkerIndex === -1) {
+    return null;
+  }
+
+  const newTalker = { ...data, id };
+  talkers[talkerIndex] = newTalker;
+  await writeTalkersFile(talkers);
+
+  return newTalker;
+}
+
+module.exports = { getTalkers, getTalkerById, addTalker, updateTalker };
