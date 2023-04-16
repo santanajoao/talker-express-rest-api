@@ -5,13 +5,15 @@ const {
   addTalker,
   updateTalker,
   deleteTalker,
+  searchTalkers,
 } = require('../utils/talker');
 const validateAuth = require('../middlewares/validateAuth');
 const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
 const validateTalk = require('../middlewares/validateTalk');
 const validateWatchedAt = require('../middlewares/validateWatchedAt');
-const validateRate = require('../middlewares/validateRate');
+const validateRateBody = require('../middlewares/validateRateBody');
+const validateRateQuerie = require('../middlewares/validateRateQuery');
 
 const router = express.Router();
 
@@ -23,6 +25,13 @@ const NOT_FOUND = 404;
 router.get('/', async (_req, res) => {
   const talkers = await getTalkers();
   res.status(OK).json(talkers);
+});
+
+router.get('/search', validateAuth, validateRateQuerie, async (req, res) => {
+  const { q, rate } = req.query;
+  console.error(q);
+  const result = await searchTalkers(q, rate);
+  res.status(OK).json(result);
 });
 
 router.get('/:id', async (req, res) => {
@@ -44,7 +53,7 @@ router.post(
   validateAge,
   validateTalk,
   validateWatchedAt,
-  validateRate,
+  validateRateBody,
   async (req, res) => {
     const talker = req.body;
     const inserted = await addTalker(talker);
@@ -59,7 +68,7 @@ router.put(
   validateAge,
   validateTalk,
   validateWatchedAt,
-  validateRate,
+  validateRateBody,
   async (req, res) => {
     const id = Number(req.params.id);
     const talker = req.body;
