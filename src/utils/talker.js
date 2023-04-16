@@ -13,4 +13,10 @@ async function getTalkers() {
   return JSON.parse(response);
 }
 
-module.exports = { getTalkers };
+async function getTalkerById(id) {
+  const talkers = await getTalkers();
+  const requestedTalker = talkers.find((talker) => talker.id === id);
+  return requestedTalker;
+}
+
+module.exports = { getTalkers, getTalkerById };
