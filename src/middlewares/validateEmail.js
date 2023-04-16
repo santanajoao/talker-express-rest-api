@@ -5,7 +5,7 @@ function validateEmail(req, _res, next) {
     next({ status: BAD_REQUEST, message: 'O campo "email" é obrigatório' });
   }
   
-  const emailRegex = /.@.\.com/;
+  const emailRegex = /.+@.+\.com/;
   const validEmail = emailRegex.test(email);
   if (!validEmail) {
     next({
