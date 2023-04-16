@@ -3,6 +3,8 @@ const { getTalkers, getTalkerById } = require('../utils/talker');
 const validateAuth = require('../middlewares/validateAuth');
 const validateName = require('../middlewares/validateName');
 const validateAge = require('../middlewares/validateAge');
+const validateTalk = require('../middlewares/validateTalk');
+const validateWatchedAt = require('../middlewares/validateWatchedAt');
 
 const router = express.Router();
 
@@ -26,8 +28,16 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', validateAuth, validateName, validateAge, async (req, res) => {
-  res.status(201).end();
-});
+router.post(
+  '/',
+  validateAuth,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateWatchedAt,
+  async (req, res) => {
+    res.status(201).end();
+  },
+); 
 
 module.exports = router;
