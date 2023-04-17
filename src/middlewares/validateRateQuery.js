@@ -1,4 +1,4 @@
-const { isInteger, isInRange, isEmpty } = require('../utils/validations');
+const { isInRange, isEmpty } = require('../utils/validations');
 
 function validateRateQuerie(req, _res, next) {
   const MIN_RATE = 1;
@@ -7,7 +7,9 @@ function validateRateQuerie(req, _res, next) {
   
   const { rate } = req.query;
   const numRate = Number(rate);
-  const isValid = isInteger(numRate) && isInRange(numRate, MIN_RATE, MAX_RATE);
+  const isValid = Number.isInteger(numRate)
+    && isInRange(numRate, MIN_RATE, MAX_RATE);
+
   if (!isEmpty(rate) && !isValid) {
     return next({
       status: BAD_REQUEST,

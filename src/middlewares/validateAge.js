@@ -8,8 +8,7 @@ function validateAge(req, _res, next) {
     });
   }
 
-  const isInteger = parseInt(age, 10) === age;
-  if (typeof age !== 'number' || age < MIN_AGE || !isInteger) {
+  if (typeof age !== 'number' || age < MIN_AGE || !Number.isInteger(age)) {
     return next({
       status: BAD_REQUEST,
       message: `O campo "age" deve ser um número inteiro igual ou maior que ${MIN_AGE}`,

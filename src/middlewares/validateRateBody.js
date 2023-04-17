@@ -1,4 +1,4 @@
-const { isInteger, isInRange, isEmpty } = require('../utils/validations');
+const { isInRange, isEmpty } = require('../utils/validations');
 
 function validateRate(req, _res, next) {
   const BAD_REQUEST = 400;
@@ -11,7 +11,7 @@ function validateRate(req, _res, next) {
     });
   }
 
-  if (!isInRange(rate, MIN_RATE, MAX_RATE) || !isInteger(rate)) {
+  if (!isInRange(rate, MIN_RATE, MAX_RATE) || !Number.isInteger(rate)) {
     return next({
       status: BAD_REQUEST,
       message: 'O campo "rate" deve ser um número inteiro entre 1 e 5',
