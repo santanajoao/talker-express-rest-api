@@ -8,8 +8,9 @@ COPY package*.json ./
 RUN npm install
 
 # Copia testes do avaliador e arquivos do projeto
-COPY __tests__ ./__tests__
-COPY .eslint* seed.sql jest.config.js ./
+# Os testes foram apagados pelo publisher
+# COPY __tests__ ./__tests__
+COPY .eslint* seed.sql ./
 
 # Usuário linux padrão do container, não é recomendado usar root
 # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user
