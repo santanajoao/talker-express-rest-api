@@ -16,7 +16,7 @@ Retorna todas as pessoas palestrantes cadastradas
 
 - <details>
     <summary>
-      Exemplo de body:
+      Exemplo de resposta:
     </summary>
   
     ```
@@ -58,7 +58,7 @@ Retorna uma pessoa palestrante a partir do seu id
 
 - Status HTTP: 200 - OK
 - <details>
-    <summary>Exemplo de body:</summary>
+    <summary>Exemplo de resposta:</summary>
     
     ```
     {
@@ -77,7 +77,7 @@ Caso não for encontrado um palestrante com o id, retorna uma mensagem de erro
 
 - Status HTTP: 404 - NOT FOUND
 - <details>
-    <summary>Exemplo de body:</summary>
+    <summary>Exemplo de resposta:</summary>
     
     ```
     {
