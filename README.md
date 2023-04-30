@@ -1,3 +1,7 @@
+# :warning: README em desenvolvimento :warning:
+
+---
+
 # Talker Manager API
 
 API REST de gerenciamento de palestrantes desenvolvida com ExpressJS.
